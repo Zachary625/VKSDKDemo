@@ -1,0 +1,22 @@
+{
+    "group": "VKontakte",
+    "libs": [],
+    "frameworks": [],
+    "libs":[],
+    "headerpaths": [],
+    "files": [],
+    "compiler_flags":[],
+    "linker_flags": [],
+    "excludes": [],
+    "folders": [
+        "../VKontakte/vk-ios-sdk"
+    ],
+    "plist": {
+        "urltype" : [
+            {
+                "role": "VK",
+                "name" : "vk6257405",
+                "schemes":["vk6257405"]
+            }
+        ],
+    },}
