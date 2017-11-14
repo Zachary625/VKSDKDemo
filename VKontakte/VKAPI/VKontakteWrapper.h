@@ -16,5 +16,18 @@
 
 +(VKontakteWrapper *)Instance;
 
++(char *)NSStringToChars:(NSString *)nsString;
+
+-(NSString *)CurrentAppID;
+-(NSString *)APIVersion;
+-(BOOL)Initialized;
+-(instancetype)InitializeWithAppID:(NSString *)appID;
+-(void)Authorize:(NSArray *)permissions;
+
+-(BOOL)AppMayExists;
+
+-(BOOL)HasPermissions:(NSArray *)permissions;
+-(BOOL)IsLoggedIn;
+-(void)ForceLogout;
 
 @end

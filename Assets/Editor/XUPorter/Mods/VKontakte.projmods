@@ -1,17 +1,24 @@
 {
     "group": "VKontakte",
-    "libs": [],
+    "libs": [
+        "libz.dylib:weak",
+        "libstdc++.dylib:weak",
+        "libc++.dylib:weak"
+    ],
     "frameworks": [],
     "headerpaths": [],
     "files": [
-        "../../../../VKontakte/VKSdkFramework.framework"
+        "../../../../VKontakte/VkSdkFramework.framework"
     ],
     "compiler_flags": [],
     "linker_flags": [],
-    "excludes": [],
+    "excludes": ["^.*\\.meta$", "^.*\\.mdown^", "^.*\\.pdf$"]
     "folders": [
-        "../../../../VKontakte/VKAPI"
+        "../VKontakte/VKAPI"
     ],
+    "buildSettings": {
+        "OTHER_LDFLAGS" : ["-ObjC"]
+    },
     "plist": {
         "urltype": [
             {
