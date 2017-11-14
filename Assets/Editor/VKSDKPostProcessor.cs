@@ -15,8 +15,7 @@ public class VKSDKPostProcessor {
 			Debug.LogWarning("Target is not iPhone. VKSDKPostProcessor will not run");
 			return;
 		}
-
-			
 	}
 #endif
 }
+

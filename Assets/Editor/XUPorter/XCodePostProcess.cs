@@ -18,8 +18,6 @@ public static class XCodePostProcess
 			return;
 		}
 
-		// ModifyInfoPList (pathToBuiltProject);
-		// ModifyUnityAppController (pathToBuiltProject);
 
 		// Create a new project object from build target
 		XCProject project = new XCProject( pathToBuiltProject );
@@ -35,20 +33,26 @@ public static class XCodePostProcess
 		//TODO implement generic settings as a module option
 		project.overwriteBuildSetting("CODE_SIGN_IDENTITY[sdk=iphoneos*]", "iPhone Distribution", "Release");
 
+		ModifyUnityAppController (pathToBuiltProject);
+
 		// Finally save the xcode project
 		project.Save();
 	}
 
-	private static void ModifyInfoPList(string path)
-	{
-		XCPlist infoPList = new XCPlist (Path.GetFullPath (path));
-		infoPList.Process (new System.Collections.Hashtable (){ 
-			{"LSApplicationQueriesSchemes", new string[] {"vk", "vk-share", "vkauthorize"}}
-		});
-	}
-
 	private static void ModifyUnityAppController(string path)
 	{
+		XClass UnityAppController = new XClass ("/Classes/UnityAppController.mm");
+
+		UnityAppController.WriteBelow (
+@"#include ""PluginBase/AppDelegateListener.h""",
+@"#import <VKSdkFramework/VKSdkFramework.h>");
+
+		UnityAppController.WriteBelow (
+@"- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
+{",
+@"    [VKSdk processOpenURL:url fromApplication:sourceApplication];");
+
+
 	}
 #endif
 
