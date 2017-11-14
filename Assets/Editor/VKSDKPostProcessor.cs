@@ -43,15 +43,18 @@ public class VKSDKPostProcessor {
 		project.ReadFromFile (pbxProjFilePath);
 		string buildTarget = project.TargetGuidByName ("Unity-iPhone");
 
-		string frameworkPath = project.FindFileGuidByRealPath ("../../../VKSDKDemo/Assets/Editor/XUPorter/Mods/../../../../VKontakte/VkSdkFramework.framework");
+//		string frameworkPath = project.FindFileGuidByRealPath ("../../../VKSDKDemo/Assets/Editor/XUPorter/Mods/../../../../VKontakte/VkSdkFramework.framework");
 
-//		string frameworkPath = project.AddFile(Application.dataPath + "/" + relativeDirectoryToFramework + frameworkName, "Frameworks/" + frameworkName, PBXSourceTree.Source);
-//		project.AddFileToBuild(buildTarget, frameworkPath);
+		string completeDirectory = Application.dataPath + "/" + relativeDirectoryToFramework;
+		string completePath = completeDirectory + frameworkName;
+		string frameworkPath = project.AddFile(completePath, "VKontakte/" + frameworkName, PBXSourceTree.Source);
+		project.AddFileToBuild(buildTarget, frameworkPath);
 
 		string embedPhase = project.AddCopyFilesBuildPhase (buildTarget, "Embed Frameworks", "", "10");
 		project.AddFileToBuildSection (buildTarget, embedPhase, frameworkPath);
 
-		project.AddBuildProperty (buildTarget, "FRAMEWORK_SEARCH_PATHS", "$(SRCROOT)/" + relativeDirectoryToFramework);
+		//project.AddBuildProperty (buildTarget, "FRAMEWORK_SEARCH_PATHS", "$(SRCROOT)/" + relativeDirectoryToFramework);
+		project.AddBuildProperty (buildTarget, "FRAMEWORK_SEARCH_PATHS", completeDirectory);
 		project.WriteToFile (pbxProjFilePath);
 	}
 

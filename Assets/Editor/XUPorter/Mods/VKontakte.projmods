@@ -8,7 +8,6 @@
     "frameworks": [],
     "headerpaths": [],
     "files": [
-        "../../../../VKontakte/VkSdkFramework.framework"
     ],
     "compiler_flags": [],
     "linker_flags": [],
