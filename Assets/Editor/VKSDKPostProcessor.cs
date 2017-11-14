@@ -40,7 +40,7 @@ public class VKSDKPostProcessor {
 		string relativeDirectoryToFramework = "../VKontakte/";
 		string frameworkName = "VKSdkFramework.framework";
 		PBXProject project = new PBXProject ();
-		project.ReadFromFile (builtXCodeProjectPath);
+		project.ReadFromFile (pbxProjFilePath);
 		string buildTarget = project.TargetGuidByName ("Unity-iPhone");
 
 
@@ -51,7 +51,7 @@ public class VKSDKPostProcessor {
 		project.AddFileToBuildSection (buildTarget, embedPhase, frameworkPath);
 
 		project.AddBuildProperty (buildTarget, "FRAMEWORK_SEARCH_PATHS", "$(SRCROOT)/" + relativeDirectoryToFramework);
-		project.WriteToFile (builtXCodeProjectPath);
+		project.WriteToFile (pbxProjFilePath);
 	}
 
 #endif
