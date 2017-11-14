@@ -9,7 +9,9 @@
     "compiler_flags": [],
     "linker_flags": [],
     "excludes": [],
-    "folders": [],
+    "folders": [
+        "../../../../VKontakte/VKAPI"
+    ],
     "plist": {
         "urltype": [
             {

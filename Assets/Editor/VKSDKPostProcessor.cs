@@ -2,7 +2,6 @@
 using UnityEditor;
 using System.Collections;
 using UnityEditor.Callbacks;
-using UnityEditor.XCodeEditor;
 using UnityEditor.iOS.Xcode;
 
 public class VKSDKPostProcessor {
@@ -15,7 +14,46 @@ public class VKSDKPostProcessor {
 			Debug.LogWarning("Target is not iPhone. VKSDKPostProcessor will not run");
 			return;
 		}
+		ManipulateInfoPList (pathToBuiltProject);
+		ManipulateEmbedFramework (pathToBuiltProject);
+
 	}
+
+	private static void ManipulateInfoPList (string builtXCodeProjectPath)
+	{
+		string infoPListFilePath = builtXCodeProjectPath + "/Info.plist";
+		PlistDocument infoPList = new PlistDocument ();
+		infoPList.ReadFromFile (infoPListFilePath);
+
+		PlistElementDict dictionary = infoPList.root.AsDict ();
+		PlistElementArray lsApplicationQueriesSchemes = dictionary.CreateArray ("LSApplicationQueriesSchemes");
+		lsApplicationQueriesSchemes.AddString ("vk");
+		lsApplicationQueriesSchemes.AddString ("vk-share");
+		lsApplicationQueriesSchemes.AddString ("vkauthorize");
+
+		infoPList.WriteToFile (infoPListFilePath);
+	}
+
+	private static void ManipulateEmbedFramework(string builtXCodeProjectPath)
+	{
+		string pbxProjFilePath = builtXCodeProjectPath + "/Unity-iPhone.xcodeproj/project.pbxproj";
+		string relativeDirectoryToFramework = "../VKontakte/";
+		string frameworkName = "VKSdkFramework.framework";
+		PBXProject project = new PBXProject ();
+		project.ReadFromFile (builtXCodeProjectPath);
+		string buildTarget = project.TargetGuidByName ("Unity-iPhone");
+
+
+		string frameworkPath = project.AddFile(Application.dataPath + relativeDirectoryToFramework + frameworkName, "Frameworks/" + frameworkName, PBXSourceTree.Source);
+		project.AddFileToBuild(buildTarget, frameworkPath);
+
+		string embedPhase = project.AddCopyFilesBuildPhase (buildTarget, "Embed Frameworks", "", "10");
+		project.AddFileToBuildSection (buildTarget, embedPhase, frameworkPath);
+
+		project.AddBuildProperty (buildTarget, "FRAMEWORK_SEARCH_PATHS", "$(SRCROOT)/" + relativeDirectoryToFramework);
+		project.WriteToFile (builtXCodeProjectPath);
+	}
+
 #endif
 }
 

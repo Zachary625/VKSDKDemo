@@ -33,15 +33,15 @@ public static class XCodePostProcess
 		//TODO implement generic settings as a module option
 		project.overwriteBuildSetting("CODE_SIGN_IDENTITY[sdk=iphoneos*]", "iPhone Distribution", "Release");
 
-		ModifyUnityAppController (pathToBuiltProject);
 
 		// Finally save the xcode project
 		project.Save();
+
 	}
 
 	private static void ModifyUnityAppController(string path)
 	{
-		XClass UnityAppController = new XClass ("/Classes/UnityAppController.mm");
+		XClass UnityAppController = new XClass (path + "/Classes/UnityAppController.mm");
 
 		UnityAppController.WriteBelow (
 @"#include ""PluginBase/AppDelegateListener.h""",
@@ -51,7 +51,6 @@ public static class XCodePostProcess
 @"- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
 {",
 @"    [VKSdk processOpenURL:url fromApplication:sourceApplication];");
-
 
 	}
 #endif
