@@ -38,46 +38,49 @@ static VKontakteWrapper *s_Instance = nil;
 
 -(NSString *)CurrentAppID
 {
-    return [VkSdk currentAppId];
+    return [VKSdk instance].currentAppId;
 }
 
 -(NSString *)APIVersion
 {
-    return [VkSdk apiVersion];
+    return [VKSdk instance].apiVersion;
 }
 
 -(BOOL)Initialized
 {
-    return [VkSdk initialized];
+    return [VKSdk initialized];
 }
 
--(instancetype)InitializeWithAppID:(NSString *)appID
+-(BOOL)InitializeWithAppID:(NSString *)appID
 {
-    return [VkSdk initializeWithAppId:appID];
+    VKSdk *vk = [VKSdk initializeWithAppId:appID];
+    if(vk != nil)
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
 }
 
 -(void)Authorize:(NSArray *)permissions
 {
-    [VkSdk authorize:permissions];
+    [VKSdk authorize:permissions];
 }
 
 -(BOOL)AppMayExists
 {
-    return [VkSdk vkAppMayExists];
-}
-
--(BOOL)HasPermissions:(NSArray *)permissions
-{
-    return [VkSdk hasPermissions:permissions];
+    return [VKSdk vkAppMayExists];
 }
 
 -(BOOL)IsLoggedIn
 {
-    return [VkSdk IsLoggedIn];
+    return [VKSdk isLoggedIn];
 }
 -(void)ForceLogout
 {
-    [VkSdk forceLogout];
+    [VKSdk forceLogout];
 }
 
 

@@ -11,7 +11,7 @@
 #endif /* VKontakteWrapper_h */
 
 @interface VKontakteWrapper : NSObject
-@property (nonatomic, copy)NSInteger appID;
+@property (nonatomic, copy)NSString *appID;
 @property (nonatomic, copy)NSString* secureKey;
 
 +(VKontakteWrapper *)Instance;
@@ -21,12 +21,11 @@
 -(NSString *)CurrentAppID;
 -(NSString *)APIVersion;
 -(BOOL)Initialized;
--(instancetype)InitializeWithAppID:(NSString *)appID;
+-(BOOL)InitializeWithAppID:(NSString *)appID;
 -(void)Authorize:(NSArray *)permissions;
 
 -(BOOL)AppMayExists;
 
--(BOOL)HasPermissions:(NSArray *)permissions;
 -(BOOL)IsLoggedIn;
 -(void)ForceLogout;
 

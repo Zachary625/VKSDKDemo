@@ -11,17 +11,17 @@
 
 char *CurrentAppID()
 {
-    return [VKontakteWrapper NSStringToChars[VKontakteWrapper CurrentAppID]];
+    return [VKontakteWrapper NSStringToChars:[VKontakteWrapper Instance].CurrentAppID];
 }
 
 char *APIVersion()
 {
-    return [VKontakteWrapper NSStringToChars[VKontakteWrapper APIVersion]];
+    return [VKontakteWrapper NSStringToChars:[VKontakteWrapper Instance].APIVersion];
 }
 
 int Initialized()
 {
-    if([VKontakteWrapper Initialized] == TRUE)
+    if([VKontakteWrapper Instance].Initialized == TRUE)
     {
         return 1;
     }
@@ -32,5 +32,13 @@ int Initialized()
 }
 int InitializeWithAppID(char* appID)
 {
+    if([[VKontakteWrapper Instance] InitializeWithAppID:[NSString stringWithUTF8String:appID]] == TRUE)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
-int InitializeWithAppIDAndAPIVersion(char* appID, char* apiVersion);
+
