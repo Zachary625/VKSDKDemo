@@ -49,7 +49,7 @@ namespace UnityEditor.XCodeEditor
 				dict.Add((K)kvp.Key, (V)kvp.Value);
 			return dict;
 		}
-		
+
 		public void AddPlistItems(string key, object value, Dictionary<string, object> dict)
 		{
 			Debug.Log ("AddPlistItems: key=" + key);
@@ -60,7 +60,7 @@ namespace UnityEditor.XCodeEditor
 			}
 			else
 			{
-				dict[key] = HashtableToDictionary<string, object>((Hashtable)value);
+				dict [key] = HashtableToDictionary<string, object> ((Hashtable)value);
 				plistModified = true;
 			}
 		}

@@ -2,21 +2,23 @@
     "group": "VKontakte",
     "libs": [],
     "frameworks": [],
-    "libs":[],
     "headerpaths": [],
-    "files": [],
-    "compiler_flags":[],
+    "files": [
+        "../../../../VKontakte/VKSdkFramework.framework"
+    ],
+    "compiler_flags": [],
     "linker_flags": [],
     "excludes": [],
-    "folders": [
-        "../VKontakte/vk-ios-sdk"
-    ],
+    "folders": [],
     "plist": {
-        "urltype" : [
+        "urltype": [
             {
                 "role": "VK",
-                "name" : "vk6257405",
-                "schemes":["vk6257405"]
+                "name": "vk6257405",
+                "schemes": [
+                    "vk6257405"
+                ]
             }
-        ],
-    },}
+        ]
+    }
+}

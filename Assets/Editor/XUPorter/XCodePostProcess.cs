@@ -18,6 +18,9 @@ public static class XCodePostProcess
 			return;
 		}
 
+		// ModifyInfoPList (pathToBuiltProject);
+		// ModifyUnityAppController (pathToBuiltProject);
+
 		// Create a new project object from build target
 		XCProject project = new XCProject( pathToBuiltProject );
 
@@ -32,11 +35,8 @@ public static class XCodePostProcess
 		//TODO implement generic settings as a module option
 		project.overwriteBuildSetting("CODE_SIGN_IDENTITY[sdk=iphoneos*]", "iPhone Distribution", "Release");
 
-		ModifyInfoPList (pathToBuiltProject);
-		ModifyUnityAppController (pathToBuiltProject);
 		// Finally save the xcode project
 		project.Save();
-
 	}
 
 	private static void ModifyInfoPList(string path)
