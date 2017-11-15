@@ -8,6 +8,9 @@
 
 #import "VKontakteWrapper.h"
 #import <VKSdkFramework/VKSdkFramework.h>
+#import "VKontakteSDKDelegate.h"
+#import "VKontakteSDKUIDelegate.h"
+#import "VKontakteUtility.h"
 
 static VKontakteWrapper *s_Instance = nil;
 
@@ -22,19 +25,6 @@ static VKontakteWrapper *s_Instance = nil;
     return s_Instance;
 }
 
-+(char *)NSStringToChars:(NSString *)nsString
-{
-    if(nsString == nil)
-    {
-        return NULL;
-    }
-    const char * cStr = nsString.UTF8String;
-    unsigned long length = strlen(cStr) + 1;
-    char *result = new char[length];
-    memset(result, 0, length);
-    memcpy(result, cStr, length);
-    return result;
-}
 
 -(NSString *)CurrentAppID
 {
@@ -56,6 +46,8 @@ static VKontakteWrapper *s_Instance = nil;
     VKSdk *vk = [VKSdk initializeWithAppId:appID];
     if(vk != nil)
     {
+        [vk registerDelegate:[[VKontakteSDKDelegate alloc] init] ];
+        [vk setUiDelegate:[[VKontakteSDKUIDelegate alloc] init] ];
         return TRUE;
     }
     else

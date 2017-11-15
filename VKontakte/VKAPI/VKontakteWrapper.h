@@ -13,10 +13,10 @@
 @interface VKontakteWrapper : NSObject
 @property (nonatomic, copy)NSString *appID;
 @property (nonatomic, copy)NSString* secureKey;
+@property (nonatomic, copy)NSString* token;
 
 +(VKontakteWrapper *)Instance;
 
-+(char *)NSStringToChars:(NSString *)nsString;
 
 -(NSString *)CurrentAppID;
 -(NSString *)APIVersion;
