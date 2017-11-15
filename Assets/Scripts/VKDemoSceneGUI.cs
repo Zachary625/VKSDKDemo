@@ -24,8 +24,11 @@ public class VKDemoSceneGUI : MonoBehaviour {
 
 		DisplayGUI (LoggedOutGUI);
 
-		_LogClear ();
-		_Log ("VKDemoSceneGUI.Start()");
+		LogClear ();
+		Log ("VKDemoSceneGUI.Start()");
+
+		bool initResult = VKAPI.I.InitializeWithAppID (VKInfo.AppID);
+		Log (string.Format("InitializeWithAppID({0}): {1}, Initialized(): {2}", VKInfo.AppID, initResult, VKAPI.I.Initailized()));
 	}
 
 	private void PrepareButtons(GameObject root)
@@ -46,27 +49,27 @@ public class VKDemoSceneGUI : MonoBehaviour {
 	
 	}
 
-	private void _LogInfo(string text)
+	public void LogInfo(string text)
 	{
-		_Log (string.Format("<color=lime>{0}</color>", text));
+		Log (string.Format("<color=lime>{0}</color>", text));
 	}
 
-	private void _LogError(string text)
+	public void LogError(string text)
 	{
-		_Log (string.Format("<color=red>{0}</color>", text));
+		Log (string.Format("<color=red>{0}</color>", text));
 	}
 
-	private void _LogWarning(string text)
+	public void LogWarning(string text)
 	{
-		_Log (string.Format("<color=yellow>{0}</color>", text));
+		Log (string.Format("<color=yellow>{0}</color>", text));
 	}
 
-	private void _LogClear()
+	public void LogClear()
 	{
 		LogText.text = string.Empty;
 	}
 
-	private void _Log(string text)
+	public void Log(string text)
 	{
 		LogText.text += ("\n" + text);
 	}
@@ -80,21 +83,21 @@ public class VKDemoSceneGUI : MonoBehaviour {
 		if (_ButtonCallbacks.ContainsKey (key)) {
 			_ButtonCallbacks[key]();
 		} else {
-			_LogError ("Unknow button " + key);
+			LogError ("Unknow button " + key);
 		}
 	}
 
 	private void OnLoginButtonClick()
 	{
-		DisplayGUI (LoggedInGUI);
+		VKAPI.I.Authorize ();
 	}
 
 	private void OnLogoutButtonClick()
 	{
-		DisplayGUI(LoggedOutGUI);
+		VKAPI.I.ForceLogout ();
 	}
 
-	private void DisplayGUI(GameObject go)
+	public void DisplayGUI(GameObject go)
 	{
 		LoggedInGUI.SetActive (LoggedInGUI == go);
 		LoggedOutGUI.SetActive (LoggedOutGUI == go);

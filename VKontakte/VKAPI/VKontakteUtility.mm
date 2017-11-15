@@ -118,8 +118,6 @@ static NSDictionary *s_VKAuthorizationStateToNSString =
   @(VKAuthorizationSafariInApp):@"VKAuthorizationSafariInApp",
   @(VKAuthorizationWebview):@"VKAuthorizationWebview",
   @(VKAuthorizationAuthorized):@"VKAuthorizationAuthorized",
-  @(VKAuthorizationUnknown):@"VKAuthorizationUnknown",
-  @(VKAuthorizationUnknown):@"VKAuthorizationUnknown",
   @(VKAuthorizationError):@"VKAuthorizationError",
 };
 

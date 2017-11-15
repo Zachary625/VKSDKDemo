@@ -8,15 +8,16 @@
 
 #import "VKontakteAPI.h"
 #import "VKontakteWrapper.h"
+#import "VKontakteUtility.h"
 
 char *CurrentAppID()
 {
-    return [VKontakteWrapper NSStringToChars:[VKontakteWrapper Instance].CurrentAppID];
+    return [VKontakteUtility NSStringToChars:[VKontakteWrapper Instance].CurrentAppID];
 }
 
 char *APIVersion()
 {
-    return [VKontakteWrapper NSStringToChars:[VKontakteWrapper Instance].APIVersion];
+    return [VKontakteUtility NSStringToChars:[VKontakteWrapper Instance].APIVersion];
 }
 
 int Initialized()
@@ -42,3 +43,12 @@ int InitializeWithAppID(char* appID)
     }
 }
 
+void Authorize()
+{
+    [[VKontakteWrapper Instance] Authorize:nil];
+}
+
+void ForceLogout()
+{
+    [[VKontakteWrapper Instance] ForceLogout];
+}

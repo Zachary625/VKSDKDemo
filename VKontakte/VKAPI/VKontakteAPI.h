@@ -22,6 +22,8 @@ extern "C" {
     int InitializeWithAppID(char* appID);
     int InitializeWithAppIDAndAPIVersion(char* appID, char* apiVersion);
     
+    void Authorize();
+    void ForceLogout();
     
 #ifdef __cplusplus
 };
