@@ -27,8 +27,8 @@ public class VKDemoSceneGUI : MonoBehaviour {
 		LogClear ();
 		Log ("VKDemoSceneGUI.Start()");
 
-		bool initResult = VKAPI.I.InitializeWithAppID (VKInfo.AppID);
-		Log (string.Format("InitializeWithAppID({0}): {1}, Initialized(): {2}", VKInfo.AppID, initResult, VKAPI.I.Initailized()));
+		bool initResult = VKAPI._InitializeWithAppID (VKInfo.AppID);
+		Log (string.Format("InitializeWithAppID({0}): {1}, Initialized(): {2}", VKInfo.AppID, initResult, VKAPI._Initailized()));
 	}
 
 	private void PrepareButtons(GameObject root)
@@ -89,12 +89,12 @@ public class VKDemoSceneGUI : MonoBehaviour {
 
 	private void OnLoginButtonClick()
 	{
-		VKAPI.I.Authorize ();
+		VKAPI._Authorize ();
 	}
 
 	private void OnLogoutButtonClick()
 	{
-		VKAPI.I.ForceLogout ();
+		VKAPI._ForceLogout ();
 	}
 
 	public void DisplayGUI(GameObject go)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-public class VKAPI
+public static class VKAPI
 {
 	#if UNITY_IOS && !UNITY_EDITOR
 	[DllImport("__Internal")]
@@ -13,36 +13,31 @@ public class VKAPI
 	[DllImport("__Internal")]
 	private static extern int ForceLogout ();
 	#endif
-	private static VKAPI _I = new VKAPI();
-	public static VKAPI I
-	{
-		get { return _I; }
-	}
 
-	public bool InitializeWithAppID (string appID)
+	public static bool _InitializeWithAppID (string appID)
 	{
 		#if UNITY_IOS && !UNITY_EDITOR
-		return VKAPI.InitializeWithAppID (appID) != 0;
+		return InitializeWithAppID (appID) != 0;
 		#endif
 		return false;
 	}
-	public bool Initailized()
+	public static bool _Initailized()
 	{
 		#if UNITY_IOS && !UNITY_EDITOR
-		return VKAPI.Initialized ();
+		return Initialized () != 0;
 		#endif
 		return false;
 	}
-	public void Authorize()
+	public static void _Authorize()
 	{
 		#if UNITY_IOS && !UNITY_EDITOR
-		VKAPI.Authorize ();
+		Authorize ();
 		#endif
 	}
-	public void ForceLogout()
+	public static void _ForceLogout()
 	{
 		#if UNITY_IOS && !UNITY_EDITOR
-		VKAPI.ForceLogout ();
+		ForceLogout ();
 		#endif
 	}
 
