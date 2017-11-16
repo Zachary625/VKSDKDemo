@@ -63,7 +63,7 @@ public class VKListener : MonoBehaviour {
 	public void vkSdkNeedCaptchaEnter(string parameter)
 	{
 		GUI.Log ("vkSdkWakeUpSessionComplete: " + parameter);
-		VKError vkError = JsonUtility.FromJson<JsonUtility> (parameter);
+		VKError vkError = JsonUtility.FromJson<VKError> (parameter);
 	}
 
 	public void vkSdkWillDismissViewController()
