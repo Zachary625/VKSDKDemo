@@ -66,6 +66,15 @@ static VKontakteWrapper *s_Instance = nil;
     return [VKSdk vkAppMayExists];
 }
 
+-(void)WakeUpSession
+{
+    [VKSdk wakeUpSession:nil completeBlock:^(VKAuthorizationState state, NSError *error) {
+        NSString *stateJson = [VKontakteUtility ToJSONString_AuthorizationState:state];
+        [VKontakteUtility Log:stateJson];
+        [VKontakteUtility UnitySendMessage:"vkSdkWakeUpSessionComplete" Parameter:[VKontakteUtility NSStringToChars:stateJson]];
+    }];
+}
+
 -(BOOL)IsLoggedIn
 {
     return [VKSdk isLoggedIn];

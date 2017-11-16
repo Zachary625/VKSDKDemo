@@ -22,6 +22,8 @@ extern "C" {
     int InitializeWithAppID(char* appID);
     int InitializeWithAppIDAndAPIVersion(char* appID, char* apiVersion);
     
+    int IsLoggedIn();
+    void WakeUpSession();
     void Authorize();
     void ForceLogout();
     

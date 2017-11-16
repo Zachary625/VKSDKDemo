@@ -44,4 +44,14 @@ public class VKListener : MonoBehaviour {
 	{
 		GUI.Log ("vkSdkTokenHasExpired: " + parameter);
 	}
+
+	public void vkSdkWakeUpSessionComplete(string parameter)
+	{
+		GUI.Log ("vkSdkWakeUpSessionComplete: " + parameter);
+		VKAuthorizationState state = VKInfo.StringToAuthorizationState[parameter];
+		if (state == VKAuthorizationState.VKAuthorizationAuthorized)
+		{
+			GUI.DisplayGUI (GUI.LoggedInGUI);
+		}
+	}
 }

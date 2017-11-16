@@ -17,12 +17,10 @@ IMPL_APP_CONTROLLER_SUBCLASS(CustomUnityAppController)
 - (BOOL)application:(UIApplication*)application openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nonnull id)annotation
 {
     [VKSdk processOpenURL:url fromApplication:sourceApplication];
-    return [super application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
 
 -(BOOL)application:(UIApplication*)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options
 {
     [VKSdk processOpenURL:url fromApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
-    return [super application:application openURL:url options:options];
 }
 @end

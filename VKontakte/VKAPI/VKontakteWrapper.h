@@ -26,6 +26,7 @@
 
 -(BOOL)AppMayExists;
 
+-(void)WakeUpSession;
 -(BOOL)IsLoggedIn;
 -(void)ForceLogout;
 

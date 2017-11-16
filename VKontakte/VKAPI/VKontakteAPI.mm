@@ -43,6 +43,23 @@ int InitializeWithAppID(char* appID)
     }
 }
 
+int IsLoggedIn()
+{
+    if([[VKontakteWrapper Instance] IsLoggedIn] == TRUE)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void WakeUpSession()
+{
+    [[VKontakteWrapper Instance] WakeUpSession];
+}
+
 void Authorize()
 {
     [[VKontakteWrapper Instance] Authorize:nil];

@@ -28,7 +28,9 @@ public class VKDemoSceneGUI : MonoBehaviour {
 		Log ("VKDemoSceneGUI.Start()");
 
 		bool initResult = VKAPI._InitializeWithAppID (VKInfo.AppID);
-		Log (string.Format("InitializeWithAppID({0}): {1}, Initialized(): {2}", VKInfo.AppID, initResult, VKAPI._Initailized()));
+		Log (string.Format(
+			"InitializeWithAppID({0}): {1}\nInitialized(): {2}\nLogged in: {3}", VKInfo.AppID, initResult, VKAPI._Initailized(), VKAPI._IsLoggedIn()));
+		VKAPI._WakeUpSession ();
 	}
 
 	private void PrepareButtons(GameObject root)
@@ -95,6 +97,7 @@ public class VKDemoSceneGUI : MonoBehaviour {
 	private void OnLogoutButtonClick()
 	{
 		VKAPI._ForceLogout ();
+		DisplayGUI (LoggedOutGUI);
 	}
 
 	public void DisplayGUI(GameObject go)

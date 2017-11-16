@@ -1,9 +1,9 @@
 {
     "group": "VKontakte",
     "libs": [
-        "libz.dylib:weak",
-        "libstdc++.dylib:weak",
-        "libc++.dylib:weak"
+        "libz.dylib",
+        "libstdc++.dylib",
+        "libc++.dylib"
     ],
     "frameworks": [],
     "headerpaths": [],
