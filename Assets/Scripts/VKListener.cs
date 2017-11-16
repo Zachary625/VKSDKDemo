@@ -54,4 +54,25 @@ public class VKListener : MonoBehaviour {
 			GUI.DisplayGUI (GUI.LoggedInGUI);
 		}
 	}
+
+	public void vkSdkShouldPresentViewController()
+	{
+		GUI.Log ("vkSdkWakeUpSessionComplete");
+	}
+
+	public void vkSdkNeedCaptchaEnter(string parameter)
+	{
+		GUI.Log ("vkSdkWakeUpSessionComplete: " + parameter);
+		VKError vkError = JsonUtility.FromJson<JsonUtility> (parameter);
+	}
+
+	public void vkSdkWillDismissViewController()
+	{
+		GUI.Log ("vkSdkWillDismissViewController");
+	}
+
+	public void vkSdkDidDismissViewController()
+	{
+		GUI.Log ("vkSdkDidDismissViewController");
+	}
 }

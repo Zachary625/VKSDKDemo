@@ -19,7 +19,7 @@
 - (void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result
 {
     NSString *resultJson = [VKontakteUtility ToJSONString_AuthorizationResult:result];
-    [VKontakteUtility Log:resultJson];
+    [VKontakteUtility Log:@"VKontakteSDKDelegate.vkSdkAccessAuthorizationFinishedWithResult: %@",resultJson];
     [VKontakteUtility UnitySendMessage:"vkSdkAccessAuthorizationFinishedWithResult" Parameter:[VKontakteUtility NSStringToChars:resultJson]];
 }
 
@@ -29,6 +29,7 @@
 - (void)vkSdkUserAuthorizationFailed
 {
     [VKontakteUtility Log:@"VKontakteSDKDelegate.vkSdkUserAuthorizationFailed"];
+
     [VKontakteUtility UnitySendMessage:"vkSdkUserAuthorizationFailed" Parameter:""];
 }
 
@@ -42,7 +43,7 @@
 - (void)vkSdkAuthorizationStateUpdatedWithResult:(VKAuthorizationResult *)result
 {
     NSString *resultJson = [VKontakteUtility ToJSONString_AuthorizationResult:result];
-    [VKontakteUtility Log:resultJson];
+    [VKontakteUtility Log:@"VKontakteSDKDelegate.vkSdkAuthorizationStateUpdatedWithResult: %@",resultJson];
     [VKontakteUtility UnitySendMessage:"vkSdkAuthorizationStateUpdatedWithResult" Parameter:[VKontakteUtility NSStringToChars:resultJson]];
 }
 
@@ -62,7 +63,7 @@
                                    @"old": oldTokenJson,
                                    @"new": newTokenJson,
                                    }];
-    [VKontakteUtility Log:tokenUpdateJson];
+    [VKontakteUtility Log:@"VKontakteSDKDelegate.vkSdkAccessTokenUpdated: %@",tokenUpdateJson];
     [VKontakteUtility UnitySendMessage:"vkSdkAccessTokenUpdated" Parameter:[VKontakteUtility NSStringToChars:tokenUpdateJson]];
 }
 
@@ -74,7 +75,7 @@
 - (void)vkSdkTokenHasExpired:(VKAccessToken *)expiredToken
 {
     NSString *tokenJson = [VKontakteUtility ToJSONString_AccessToken:expiredToken];
-    [VKontakteUtility Log:tokenJson];
+    [VKontakteUtility Log:@"VKontakteSDKDelegate.vkSdkTokenHasExpired: %@",tokenJson];
     [VKontakteUtility UnitySendMessage:"vkSdkTokenHasExpired" Parameter:[VKontakteUtility NSStringToChars:tokenJson]];
 }
 

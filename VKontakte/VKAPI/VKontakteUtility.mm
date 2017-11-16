@@ -126,4 +126,26 @@ static NSDictionary *s_VKAuthorizationStateToNSString =
     return [s_VKAuthorizationStateToNSString objectForKey:@(state)];
 }
 
++(NSString * _Nonnull)ToJSONString_Error:(VKError * _Nullable)error
+{
+    if(error == nil)
+    {
+        return @"";
+    }
+    
+    NSDictionary *data =
+    @{
+      @"captchaSid":error.captchaSid,
+      @"captchaImg":error.captchaImg,
+      @"errorCode":@(error.errorCode),
+      @"errorText":error.errorText,
+      @"errorMessage":error.errorMessage,
+      @"errorReason":error.errorReason,
+      @"redirectUri":error.redirectUri,
+      @"debugDescription":error.debugDescription,
+      @"description":error.description,
+    };
+    return [self ToJSONString_NSStringDictionary:data];
+}
+
 @end

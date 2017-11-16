@@ -16,6 +16,7 @@ public class VKDemoSceneGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		_ButtonCallbacks.Add ("ButtonWakeUpSession", OnWakeUpButtonClick);
 		_ButtonCallbacks.Add ("ButtonLogin", OnLoginButtonClick);
 		_ButtonCallbacks.Add ("ButtonLogout", OnLogoutButtonClick);
 
@@ -30,7 +31,6 @@ public class VKDemoSceneGUI : MonoBehaviour {
 		bool initResult = VKAPI._InitializeWithAppID (VKInfo.AppID);
 		Log (string.Format(
 			"InitializeWithAppID({0}): {1}\nInitialized(): {2}\nLogged in: {3}", VKInfo.AppID, initResult, VKAPI._Initailized(), VKAPI._IsLoggedIn()));
-		VKAPI._WakeUpSession ();
 	}
 
 	private void PrepareButtons(GameObject root)
@@ -89,6 +89,10 @@ public class VKDemoSceneGUI : MonoBehaviour {
 		}
 	}
 
+	private void OnWakeUpButtonClick()
+	{
+		VKAPI._WakeUpSession ();
+	}
 	private void OnLoginButtonClick()
 	{
 		VKAPI._Authorize ();

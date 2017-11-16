@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "VKontakteSDKUIDelegate.h"
 #import "VKontakteWrapper.h"
+#import "VKontakteUtility.h"
 
 @implementation VKontakteSDKUIDelegate
 /**
@@ -17,7 +18,8 @@
  */
 - (void)vkSdkShouldPresentViewController:(UIViewController *)controller
 {
-    
+    [VKontakteUtility Log:@"VKontakteSDKUIDelegate.vkSdkShouldPresentViewController: "];
+    [VKontakteUtility UnitySendMessage:"vkSdkShouldPresentViewController" Parameter:""];
 }
 
 /**
@@ -28,7 +30,9 @@
  */
 - (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError
 {
-    
+    NSString *captchaErrorJson = [VKontakteUtility ToJSONString_Error:captchaError];
+    [VKontakteUtility Log:@"VKontakteSDKUIDelegate.vkSdkNeedCaptchaEnter: %@", captchaErrorJson];
+    [VKontakteUtility UnitySendMessage:"vkSdkNeedCaptchaEnter" Parameter:[VKontakteUtility NSStringToChars:captchaErrorJson]];
 }
 
 /**
@@ -36,7 +40,8 @@
  */
 - (void)vkSdkWillDismissViewController:(UIViewController *)controller
 {
-    
+    [VKontakteUtility Log:@"VKontakteSDKUIDelegate.vkSdkWillDismissViewController: "];
+    [VKontakteUtility UnitySendMessage:"vkSdkWillDismissViewController" Parameter:""];
 }
 
 /**
@@ -44,7 +49,8 @@
  */
 - (void)vkSdkDidDismissViewController:(UIViewController *)controller
 {
-    
+    [VKontakteUtility Log:@"VKontakteSDKUIDelegate.vkSdkDidDismissViewController: "];
+    [VKontakteUtility UnitySendMessage:"vkSdkDidDismissViewController" Parameter:""];
 }
 
 @end

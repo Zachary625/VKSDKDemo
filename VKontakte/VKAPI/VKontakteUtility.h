@@ -13,14 +13,15 @@
 
 #import <VKSdkFramework/VKSdkFramework.h>
 
-@interface VKontakteUtility
+@interface VKontakteUtility: NSObject
 
 +(void)Log:(NSString * _Nonnull)log, ...;
-+(void)UnitySendMessage:(const char *)method Parameter:(const char *)parameter;
-+(char *)NSStringToChars:(NSString *)nsString;
-+(NSString *)ToJSONString_NSStringDictionary:(NSDictionary *)dictionary;
-+(NSString *)ToJSONString_AuthorizationResult:(VKAuthorizationResult *)result;
-+(NSString *)ToJSONString_User:(VKUser *)user;
-+(NSString *)ToJSONString_AccessToken:(VKAccessToken *)accessToken;
-+(NSString *)ToJSONString_AuthorizationState:(VKAuthorizationState)state;
++(void)UnitySendMessage:(const char * _Nonnull)method Parameter:(const char * _Nullable)parameter;
++(char * _Nonnull)NSStringToChars:(NSString * _Nullable)nsString;
++(NSString * _Nonnull)ToJSONString_NSStringDictionary:(NSDictionary * _Nullable)dictionary;
++(NSString * _Nonnull)ToJSONString_AuthorizationResult:(VKAuthorizationResult * _Nullable)result;
++(NSString * _Nonnull)ToJSONString_User:(VKUser * _Nullable)user;
++(NSString * _Nonnull)ToJSONString_AccessToken:(VKAccessToken * _Nullable)accessToken;
++(NSString * _Nonnull)ToJSONString_AuthorizationState:(VKAuthorizationState)state;
++(NSString * _Nonnull)ToJSONString_Error:(VKError * _Nullable)error;
 @end

@@ -64,3 +64,17 @@ public enum VKAuthorizationState
 	VKAuthorizationAuthorized,
 	VKAuthorizationError,
 }
+
+public struct VKError
+{
+	public string captchaSid;
+	public string captchaImg;
+	public string errorCode;
+	public string errorText;
+	public string errorMessage;
+	public string errorReason;
+	public string redirectUri;
+	public string debugDescription;
+	public string description;
+}
+
