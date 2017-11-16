@@ -20,6 +20,25 @@ static inline NSString * _Nonnull _(NSNumber * _Nullable nsNumber)
 
 @implementation VKontakteUtility
 
++(void)CopyStringToClipboard: (NSString * _Nullable)content
+{
+    if(content)
+    {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = content;
+    }
+}
+
++(NSString * _Nonnull)CopyStringFromClipboard
+{
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    NSString *content = pasteboard.string;
+    if(content)
+    {
+        return content;
+    }
+    return @"";
+}
 
 +(void)Log:(NSString * _Nonnull)log, ...
 {
@@ -40,7 +59,7 @@ static const char *s_VKGameObjectName = "VKListener";
     UnitySendMessage(s_VKGameObjectName, method, parameter);
 }
 
-+(char *)NSStringToChars:(NSString *)nsString
++(const char * _Nullable)NSStringToChars:(NSString *)nsString
 {
     if(!nsString)
     {

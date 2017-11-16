@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class VKDemoSceneGUI : MonoBehaviour {
 
 	public Text LogText;
+	public Text CredentialText;
 	public GameObject IdentificationGUI = null;
 	public GameObject LoggedOutGUI = null; // logged out gui
 	public GameObject LoggedInGUI = null; // logged in gui
@@ -21,6 +22,7 @@ public class VKDemoSceneGUI : MonoBehaviour {
 		_ButtonCallbacks.Add ("ButtonIsLoggedIn", OnIsLoggedInButtonClick);
 		_ButtonCallbacks.Add ("ButtonLogin", OnLoginButtonClick);
 		_ButtonCallbacks.Add ("ButtonLogout", OnLogoutButtonClick);
+		_ButtonCallbacks.Add ("ButtonCopyCredential", OnCopyCredentialButtonClick);
 
 		PrepareButtons (IdentificationGUI);
 		PrepareButtons (LoggedOutGUI);
@@ -115,6 +117,11 @@ public class VKDemoSceneGUI : MonoBehaviour {
 		DisplayGUI (LoggedOutGUI);
 	}
 
+	private void OnCopyCredentialButtonClick()
+	{
+		LogCredentials ();
+	}
+
 	public void DisplayGUI(GameObject go)
 	{
 		if (LoggedInGUI != null)
@@ -127,5 +134,11 @@ public class VKDemoSceneGUI : MonoBehaviour {
 		}
 	}
 
+	public void LogCredentials()
+	{
+		string json = JsonUtility.ToJson (VKInfo.AccessToken);
+		LogInfo (json);
+		VKAPI._CopyStringToClipboard (json);
+	}
 
 }

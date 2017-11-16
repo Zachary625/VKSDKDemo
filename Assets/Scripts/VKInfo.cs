@@ -10,6 +10,8 @@ public static class VKInfo {
 	public static string URLScheme_Name_iOS { get { return "vk" + AppID; } }
 	public static string URLScheme_Scheme_iOS { get { return "vk" + AppID; } }
 
+	public static VKAccessToken AccessToken;
+
 	public static Dictionary<string, VKAuthorizationState> StringToAuthorizationState = new Dictionary<string, VKAuthorizationState> ()
 	{
 		{"VKAuthorizationUnknown", VKAuthorizationState.VKAuthorizationUnknown},
@@ -50,6 +52,12 @@ public struct VKAccessToken
 	public string created;
 	public string expiresIn;
 	public string httpsRequired;
+}
+
+public struct VKAccessTokenUpdate
+{
+	public string oldToken;
+	public string newToken;
 }
 
 public enum VKAuthorizationState

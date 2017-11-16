@@ -16,8 +16,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    char *CurrentAppID();
-    char *APIVersion();
+    const char *CurrentAppID();
+    const char *APIVersion();
     int Initialized();
     int InitializeWithAppID(char* appID);
     int InitializeWithAppIDAndAPIVersion(char* appID, char* apiVersion);
@@ -27,6 +27,8 @@ extern "C" {
     void Authorize();
     void ForceLogout();
     
+    void CopyStringToClipboard(const char *content);
+    const char *CopyStringFromClipboard();
 #ifdef __cplusplus
 };
 #endif

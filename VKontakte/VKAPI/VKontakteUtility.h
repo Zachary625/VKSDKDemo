@@ -14,10 +14,11 @@
 #import <VKSdkFramework/VKSdkFramework.h>
 
 @interface VKontakteUtility: NSObject
-
++(void)CopyStringToClipboard:(NSString * _Nullable)content;
++(NSString * _Nonnull)CopyStringFromClipboard;
 +(void)Log:(NSString * _Nonnull)log, ...;
 +(void)UnitySendMessage:(const char * _Nonnull)method Parameter:(const char * _Nullable)parameter;
-+(char * _Nonnull)NSStringToChars:(NSString * _Nullable)nsString;
++(const char * _Nullable)NSStringToChars:(NSString * _Nullable)nsString;
 +(NSString * _Nonnull)ToJSONString_NSStringDictionary:(NSDictionary * _Nullable)dictionary;
 +(NSString * _Nonnull)ToJSONString_AuthorizationResult:(VKAuthorizationResult * _Nullable)result;
 +(NSString * _Nonnull)ToJSONString_User:(VKUser * _Nullable)user;

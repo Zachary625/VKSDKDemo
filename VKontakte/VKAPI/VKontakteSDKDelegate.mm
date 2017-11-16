@@ -60,8 +60,8 @@
 
     NSString *tokenUpdateJson = [VKontakteUtility ToJSONString_NSStringDictionary:
                                  @{
-                                   @"old": oldTokenJson,
-                                   @"new": newTokenJson,
+                                   @"oldToken": oldTokenJson,
+                                   @"newToken": newTokenJson,
                                    }];
     [VKontakteUtility Log:@"VKontakteSDKDelegate.vkSdkAccessTokenUpdated: %@",tokenUpdateJson];
     [VKontakteUtility UnitySendMessage:"vkSdkAccessTokenUpdated" Parameter:[VKontakteUtility NSStringToChars:tokenUpdateJson]];

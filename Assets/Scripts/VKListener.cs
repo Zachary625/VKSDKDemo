@@ -38,6 +38,20 @@ public class VKListener : MonoBehaviour {
 	public void vkSdkAccessTokenUpdated(string parameter)
 	{
 		GUI.Log ("vkSdkAccessTokenUpdated: " + parameter);
+		if (string.IsNullOrEmpty (parameter))
+		{
+			return;
+		}
+		VKAccessTokenUpdate update = JsonUtility.FromJson<VKAccessTokenUpdate> (parameter);
+		if (string.IsNullOrEmpty (update.newToken)) {
+			VKInfo.AccessToken = new VKAccessToken();
+		}
+		else
+		{
+			VKInfo.AccessToken = JsonUtility.FromJson<VKAccessToken> (update.newToken);
+		}
+		GUI.LogCredentials ();
+
 	}
 
 	public void vkSdkTokenHasExpired(string parameter)
@@ -57,12 +71,12 @@ public class VKListener : MonoBehaviour {
 
 	public void vkSdkShouldPresentViewController()
 	{
-		GUI.Log ("vkSdkWakeUpSessionComplete");
+		GUI.Log ("vkSdkShouldPresentViewController");
 	}
 
 	public void vkSdkNeedCaptchaEnter(string parameter)
 	{
-		GUI.Log ("vkSdkWakeUpSessionComplete: " + parameter);
+		GUI.Log ("vkSdkNeedCaptchaEnter: " + parameter);
 		VKError vkError = JsonUtility.FromJson<VKError> (parameter);
 	}
 

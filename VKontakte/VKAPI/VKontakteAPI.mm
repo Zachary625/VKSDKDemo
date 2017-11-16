@@ -10,12 +10,12 @@
 #import "VKontakteWrapper.h"
 #import "VKontakteUtility.h"
 
-char *CurrentAppID()
+const char *CurrentAppID()
 {
     return [VKontakteUtility NSStringToChars:[VKontakteWrapper Instance].CurrentAppID];
 }
 
-char *APIVersion()
+const char *APIVersion()
 {
     return [VKontakteUtility NSStringToChars:[VKontakteWrapper Instance].APIVersion];
 }
@@ -69,3 +69,18 @@ void ForceLogout()
 {
     [[VKontakteWrapper Instance] ForceLogout];
 }
+
+void CopyStringToClipboard(const char *content)
+{
+    if(content != NULL)
+    {
+        [VKontakteUtility CopyStringToClipboard:[NSString stringWithUTF8String:content]];
+    }
+}
+
+const char *CopyStringFromClipboard()
+{
+    return [[VKontakteUtility CopyStringFromClipboard] UTF8String];
+}
+
+

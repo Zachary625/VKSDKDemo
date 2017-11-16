@@ -16,7 +16,13 @@ public static class VKAPI
 	private static extern void WakeUpSession();
 	[DllImport("__Internal")]
 	private static extern int IsLoggedIn();
+	[DllImport("__Internal")]
+	private static extern void CopyStringToClipboard(string content);
+	[DllImport("__Internal")]
+	private static extern string CopyStringFromClipboard();
 	#endif
+
+
 
 	public static bool _InitializeWithAppID (string appID)
 	{
@@ -60,5 +66,18 @@ public static class VKAPI
 		#endif
 	}
 
+	public static void _CopyStringToClipboard(string content)
+	{
+		#if UNITY_IOS && !UNITY_EDITOR
+		CopyStringToClipboard (content);
+		#endif
+	}
 
+	public static string _CopyStringFromClipboard()
+	{
+		#if UNITY_IOS && !UNITY_EDITOR
+		return CopyStringFromClipboard ();
+		#endif
+		return string.Empty;
+	}
 }

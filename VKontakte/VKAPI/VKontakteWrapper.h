@@ -11,9 +11,6 @@
 #endif /* VKontakteWrapper_h */
 
 @interface VKontakteWrapper : NSObject
-@property (nonatomic, copy)NSString *appID;
-@property (nonatomic, copy)NSString* secureKey;
-@property (nonatomic, copy)NSString* token;
 
 +(VKontakteWrapper *)Instance;
 
