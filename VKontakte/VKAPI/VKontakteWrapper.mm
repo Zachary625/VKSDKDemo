@@ -41,13 +41,24 @@ static VKontakteWrapper *s_Instance = nil;
     return [VKSdk initialized];
 }
 
+static VKontakteSDKDelegate *s_vkSdkDelegate;
+static VKontakteSDKUIDelegate *s_vkSdkUIDelegate;
+
 -(BOOL)InitializeWithAppID:(NSString *)appID
 {
     VKSdk *vk = [VKSdk initializeWithAppId:appID];
     if(vk != nil)
     {
-        [vk registerDelegate:[[VKontakteSDKDelegate alloc] init] ];
-        [vk setUiDelegate:[[VKontakteSDKUIDelegate alloc] init] ];
+        if(s_vkSdkDelegate == nil)
+        {
+            s_vkSdkDelegate =[[VKontakteSDKDelegate alloc] init];
+        }
+        if(s_vkSdkUIDelegate == nil)
+        {
+            s_vkSdkUIDelegate =[[VKontakteSDKUIDelegate alloc] init];
+        }
+        [vk registerDelegate: s_vkSdkDelegate];
+        [vk setUiDelegate: s_vkSdkUIDelegate];
         return TRUE;
     }
     else

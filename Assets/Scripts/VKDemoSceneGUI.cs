@@ -6,8 +6,9 @@ using System.Collections.Generic;
 public class VKDemoSceneGUI : MonoBehaviour {
 
 	public Text LogText;
-	public GameObject LoggedOutGUI; // logged out gui
-	public GameObject LoggedInGUI; // logged in gui
+	public GameObject IdentificationGUI = null;
+	public GameObject LoggedOutGUI = null; // logged out gui
+	public GameObject LoggedInGUI = null; // logged in gui
 	// public GameObject SocialGUI; // social gui(friends etc.)
 
 	void Awake() 
@@ -17,9 +18,11 @@ public class VKDemoSceneGUI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_ButtonCallbacks.Add ("ButtonWakeUpSession", OnWakeUpButtonClick);
+		_ButtonCallbacks.Add ("ButtonIsLoggedIn", OnIsLoggedInButtonClick);
 		_ButtonCallbacks.Add ("ButtonLogin", OnLoginButtonClick);
 		_ButtonCallbacks.Add ("ButtonLogout", OnLogoutButtonClick);
 
+		PrepareButtons (IdentificationGUI);
 		PrepareButtons (LoggedOutGUI);
 		PrepareButtons (LoggedInGUI);
 
@@ -35,6 +38,9 @@ public class VKDemoSceneGUI : MonoBehaviour {
 
 	private void PrepareButtons(GameObject root)
 	{
+		if (root == null) {
+			return;	
+		}
 		foreach (Button childButton in root.GetComponentsInChildren<Button>(true)) {
 			Button clickedButton = childButton;
 			childButton.onClick.AddListener(delegate
@@ -53,7 +59,7 @@ public class VKDemoSceneGUI : MonoBehaviour {
 
 	public void LogInfo(string text)
 	{
-		Log (string.Format("<color=lime>{0}</color>", text));
+		Log (string.Format("<color=green>{0}</color>", text));
 	}
 
 	public void LogError(string text)
@@ -93,6 +99,11 @@ public class VKDemoSceneGUI : MonoBehaviour {
 	{
 		VKAPI._WakeUpSession ();
 	}
+
+	private void OnIsLoggedInButtonClick()
+	{
+		LogInfo ("IsLoggedIn: " + VKAPI._IsLoggedIn());
+	}
 	private void OnLoginButtonClick()
 	{
 		VKAPI._Authorize ();
@@ -106,8 +117,14 @@ public class VKDemoSceneGUI : MonoBehaviour {
 
 	public void DisplayGUI(GameObject go)
 	{
-		LoggedInGUI.SetActive (LoggedInGUI == go);
-		LoggedOutGUI.SetActive (LoggedOutGUI == go);
+		if (LoggedInGUI != null)
+		{
+			LoggedInGUI.SetActive (LoggedInGUI == go);
+		}
+		if (LoggedOutGUI != null)
+		{
+			LoggedOutGUI.SetActive (LoggedOutGUI == go);
+		}
 	}
 
 

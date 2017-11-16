@@ -7,7 +7,19 @@
 
 #import <Foundation/Foundation.h>
 #import "VKontakteUtility.h"
+
+static inline NSString * _Nonnull _(NSString * _Nullable nsString)
+{
+    return (!nsString)? @"": nsString;
+}
+
+static inline NSString * _Nonnull _(NSNumber * _Nullable nsNumber)
+{
+    return (!nsNumber)? @"": [nsNumber stringValue];
+}
+
 @implementation VKontakteUtility
+
 
 +(void)Log:(NSString * _Nonnull)log, ...
 {
@@ -30,7 +42,7 @@ static const char *s_VKGameObjectName = "VKListener";
 
 +(char *)NSStringToChars:(NSString *)nsString
 {
-    if(nsString == nil)
+    if(!nsString)
     {
         return NULL;
     }
@@ -43,11 +55,11 @@ static const char *s_VKGameObjectName = "VKListener";
 }
 +(NSString *)ToJSONString_NSStringDictionary:(NSDictionary *)dictionary
 {
-    if(dictionary == nil)
+    if(!dictionary)
     {
         return @"";
     }
-    NSData *data = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
     NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return json;
 }
@@ -55,55 +67,54 @@ static const char *s_VKGameObjectName = "VKListener";
 
 +(NSString *)ToJSONString_AuthorizationResult:(VKAuthorizationResult *)result
 {
-    if(result == nil)
+    if(!result)
     {
         return @"";
     }
 
     NSDictionary *data =
     @{
-      @"state":[self ToJSONString_AuthorizationState:result.state],
-      @"user":[self ToJSONString_User:result.user],
-      @"token":[self ToJSONString_AccessToken:result.token],
+      @"state":[self ToJSONString_AuthorizationState:[result state]],
+      @"user":[self ToJSONString_User:[result user]],
+      @"token":[self ToJSONString_AccessToken:[result token]],
     };
     return [self ToJSONString_NSStringDictionary:data];
 }
 
 +(NSString *)ToJSONString_User:(VKUser *)user
 {
-    if(user == nil)
+    if(!user)
     {
         return @"";
     }
     NSDictionary *data =
     @{
-      @"id":user.id,
-      @"nickname":user.nickname,
-      @"first_name":user.first_name,
-      @"last_name":user.last_name,
-      @"screen_name":user.screen_name,
-      @"bdate":user.bdate,
-      @"sex":user.sex,
-      @"description":user.description,
-      @"status":user.status,
+      @"id":_([user id]),
+      @"nickname":_([user nickname]),
+      @"first_name":_([user first_name]),
+      @"last_name":_([user last_name]),
+      @"screen_name":_([user screen_name]),
+      @"bdate":_([user bdate]),
+      @"sex":_([user sex]),
+      @"status":_([user status]),
     };
     return [self ToJSONString_NSStringDictionary:data];
 }
 
 +(NSString *)ToJSONString_AccessToken:(VKAccessToken *)accessToken
 {
-    if(accessToken == nil)
+    if(!accessToken)
     {
         return @"";
     }
     NSDictionary *data =
     @{
-      @"userId":accessToken.userId,
-      @"accessToken":accessToken.accessToken,
-      @"secret":accessToken.secret,
-      @"created":@(accessToken.created),
-      @"expiresIn":@(accessToken.expiresIn),
-      @"httpsRequired":@(accessToken.httpsRequired),
+      @"userId":_([accessToken userId]),
+      @"accessToken":_([accessToken accessToken]),
+      @"secret":_([accessToken secret]),
+      @"created":@([accessToken created]),
+      @"expiresIn":@([accessToken expiresIn]),
+      @"httpsRequired":@([accessToken httpsRequired]),
     };
     return [self ToJSONString_NSStringDictionary:data];
 
@@ -128,22 +139,21 @@ static NSDictionary *s_VKAuthorizationStateToNSString =
 
 +(NSString * _Nonnull)ToJSONString_Error:(VKError * _Nullable)error
 {
-    if(error == nil)
+    if(!error)
     {
         return @"";
     }
     
     NSDictionary *data =
     @{
-      @"captchaSid":error.captchaSid,
-      @"captchaImg":error.captchaImg,
-      @"errorCode":@(error.errorCode),
-      @"errorText":error.errorText,
-      @"errorMessage":error.errorMessage,
-      @"errorReason":error.errorReason,
-      @"redirectUri":error.redirectUri,
-      @"debugDescription":error.debugDescription,
-      @"description":error.description,
+      @"captchaSid":_([error captchaSid]),
+      @"captchaImg":_([error captchaImg]),
+      @"errorCode":@([error errorCode]),
+      @"errorText":_([error errorText]),
+      @"errorMessage":_([error errorMessage]),
+      @"errorReason":_([error errorReason]),
+      @"redirectUri":_([error redirectUri]),
+      @"debugDescription":_([error debugDescription ]),
     };
     return [self ToJSONString_NSStringDictionary:data];
 }

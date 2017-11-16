@@ -39,7 +39,6 @@ public struct VKUser
 	public string screen_name;
 	public string bdate;
 	public string sex;
-	public string description;
 	public string status;
 }
 
@@ -75,6 +74,5 @@ public struct VKError
 	public string errorReason;
 	public string redirectUri;
 	public string debugDescription;
-	public string description;
 }
 
