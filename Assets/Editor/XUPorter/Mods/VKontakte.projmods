@@ -13,7 +13,7 @@
     "linker_flags": [],
     "excludes": ["^.*\\.meta$", "^.*\\.mdown^", "^.*\\.pdf$"]
     "folders": [
-        "../VKontakte/VKAPI"
+        "../VKontakte/VKAPI/iOS"
     ],
     "buildSettings": {
         "OTHER_LDFLAGS" : ["-ObjC"]
