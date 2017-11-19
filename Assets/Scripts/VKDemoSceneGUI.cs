@@ -33,9 +33,9 @@ public class VKDemoSceneGUI : MonoBehaviour {
 		LogClear ();
 		Log ("VKDemoSceneGUI.Start()");
 
-		bool initResult = VKAPI._InitializeWithAppID (VKInfo.AppID);
+		bool initResult = VKSDK._InitializeWithAppID (VKInfo.AppID);
 		Log (string.Format(
-			"InitializeWithAppID({0}): {1}\nInitialized(): {2}\nLogged in: {3}", VKInfo.AppID, initResult, VKAPI._Initailized(), VKAPI._IsLoggedIn()));
+			"InitializeWithAppID({0}): {1}\nInitialized(): {2}\nLogged in: {3}", VKInfo.AppID, initResult, VKSDK._Initailized(), VKSDK._IsLoggedIn()));
 	}
 
 	private void PrepareButtons(GameObject root)
@@ -99,21 +99,21 @@ public class VKDemoSceneGUI : MonoBehaviour {
 
 	private void OnWakeUpButtonClick()
 	{
-		VKAPI._WakeUpSession ();
+		VKSDK._WakeUpSession ();
 	}
 
 	private void OnIsLoggedInButtonClick()
 	{
-		LogInfo ("IsLoggedIn: " + VKAPI._IsLoggedIn());
+		LogInfo ("IsLoggedIn: " + VKSDK._IsLoggedIn());
 	}
 	private void OnLoginButtonClick()
 	{
-		VKAPI._Authorize ();
+		VKSDK._Authorize ();
 	}
 
 	private void OnLogoutButtonClick()
 	{
-		VKAPI._ForceLogout ();
+		VKSDK._ForceLogout ();
 		DisplayGUI (LoggedOutGUI);
 	}
 
@@ -138,7 +138,7 @@ public class VKDemoSceneGUI : MonoBehaviour {
 	{
 		string json = JsonUtility.ToJson (VKInfo.AccessToken);
 		LogInfo (json);
-		VKAPI._CopyStringToClipboard (json);
+		VKSDK._CopyStringToClipboard (json);
 	}
 
 }
