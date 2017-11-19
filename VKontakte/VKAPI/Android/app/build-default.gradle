@@ -1,8 +1,9 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
     defaultConfig {
+        applicationId "com.zachary625.vkdemo.vkapi"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -15,8 +16,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors {
-    }
 }
 
 dependencies {
@@ -27,16 +26,3 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':vksdk_library-release')
 }
-
-task buildJar(type: Copy) {
-    from('build/intermediates/bundles/release/')
-    into('build/libs/')
-    include('classes.jar')
-    rename('classes.jar', 'VKAPI.jar')
-}
-
-task clearJar(type: Delete) {
-    delete 'build/libs/VKAPI.jar'
-}
-
-buildJar.dependsOn(clearJar, build)
