@@ -62,7 +62,7 @@ public static class VKSDK
 		#if UNITY_IOS && !UNITY_EDITOR
 		return IsLoggedIn () != 0;
 		#elif UNITY_ANDROID && !UNITY_EDITOR
-		VKAPI_Android.CallStatic("IsLoggedIn");
+		return VKAPI_Android.CallStatic<bool>("IsLoggedIn");
 		#endif
 		return false;
 	}
@@ -80,7 +80,7 @@ public static class VKSDK
 		#if UNITY_IOS && !UNITY_EDITOR
 		Authorize ();
 		#elif UNITY_ANDROID && !UNITY_EDITOR
-		VKAPI_Android.CallStatic("Login");
+		VKAPI_Android.CallStatic("Login", ToJava(new string[0]));
 		#endif
 	}
 	public static void Logout()
@@ -105,6 +105,7 @@ public static class VKSDK
 	{
 		#if UNITY_IOS && !UNITY_EDITOR
 		return CopyStringFromClipboard ();
+		#elif UNITY_ANDROID && !UNITY_EDITOR
 		return VKAPI_Android.CallStatic<string>("CopyStringFromClipboard");
 		#endif
 		return string.Empty;

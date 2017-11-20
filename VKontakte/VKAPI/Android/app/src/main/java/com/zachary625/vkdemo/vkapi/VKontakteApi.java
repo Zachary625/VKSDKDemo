@@ -34,13 +34,13 @@ public class VKontakteApi {
         Log.e(LOG_TAG, string);
     }
 
-    public static void CopyToClipboard(String label, String content)
+    public static void CopyStringToClipboard(String label, String content)
     {
         ClipboardManager cm = (ClipboardManager) MainActivity.getSystemService(Context.CLIPBOARD_SERVICE);
         cm.setPrimaryClip(ClipData.newPlainText(label, content));
     }
 
-    public static String CopyFromClipboard()
+    public static String CopyStringFromClipboard()
     {
         ClipboardManager cm = (ClipboardManager) MainActivity.getSystemService(Context.CLIPBOARD_SERVICE);
         if(!cm.hasPrimaryClip())
@@ -98,12 +98,16 @@ public class VKontakteApi {
     private static final String VK_LISTENER = "VKListener";
     public static void UnitySendMessage(String message, String parameter)
     {
-        Log(message + ": " + parameter);
+        Log(String.format("VKontakteApi.UnitySendMessage(%s, %s, %s)", VK_LISTENER, message, parameter));
         UnityPlayer.UnitySendMessage(VK_LISTENER, message, parameter);
     }
 
     public static String ToJSONString(VKAccessToken accessToken)
     {
+        if(accessToken == null)
+        {
+            return "";
+        }
         JSONObject result = new JSONObject();
         try
         {
@@ -125,6 +129,10 @@ public class VKontakteApi {
 
     public static String ToJSONString(VKError error)
     {
+        if(error == null)
+        {
+            return "";
+        }
         JSONObject result = new JSONObject();
         try
         {

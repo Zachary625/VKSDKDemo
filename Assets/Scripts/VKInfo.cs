@@ -23,6 +23,14 @@ public static class VKInfo {
 		{"VKAuthorizationAuthorized", VKAuthorizationState.VKAuthorizationAuthorized},
 		{"VKAuthorizationError", VKAuthorizationState.VKAuthorizationError},
 	};
+
+	public static Dictionary<string, VKLoginState> StringToLoginState = new Dictionary<string, VKLoginState>()
+	{
+		{"Unknown", VKLoginState.Unknown},
+		{"Pending", VKLoginState.Pending},
+		{"LoggedOut", VKLoginState.LoggedOut},
+		{"LoggedIn", VKLoginState.LoggedIn},
+	};
 }
 
 public struct VKAuthorizationResult
@@ -84,3 +92,10 @@ public struct VKError
 	public string debugDescription;
 }
 
+public enum VKLoginState
+{
+	Unknown,
+	Pending,
+	LoggedOut,
+	LoggedIn,
+}
